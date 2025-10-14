@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "432142809269",
+    "project_id": "laihari",
+    "storage_bucket": "laihari.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432142809269:android:cb60dadca5c41843d4a6fc",
+        "android_client_info": {
+          "package_name": "com.example.laihari"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFtd_x7ADXSioqoKO0TCO1iYccF3nyrI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

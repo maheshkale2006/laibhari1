@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">laihari</string>
+    <string name="my_products">My Products</string>
+    <string name="no_products_added">No products added yet</string>
+</resources>
