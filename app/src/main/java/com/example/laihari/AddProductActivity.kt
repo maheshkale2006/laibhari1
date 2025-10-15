@@ -2,13 +2,17 @@ package com.example.laihari
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Base64
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import java.util.*
 
 class AddProductActivity : AppCompatActivity() {
@@ -23,6 +27,7 @@ class AddProductActivity : AppCompatActivity() {
     private lateinit var btnSelectImage: Button
 
     private var imageUri: Uri? = null
+    private var imageBase64: String? = null
     private val PICK_IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +80,20 @@ class AddProductActivity : AppCompatActivity() {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
             imageUri = data.data
             productImage.setImageURI(imageUri)
+
+            // Convert selected image to Base64
+            val inputStream: InputStream? = contentResolver.openInputStream(imageUri!!)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            imageBase64 = bitmapToBase64(bitmap)
         }
+    }
+
+    // Convert Bitmap to Base64
+    private fun bitmapToBase64(bitmap: Bitmap): String {
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream) // 50% quality
+        val imageBytes = outputStream.toByteArray()
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }
 
     private fun addProductToFirebase() {
@@ -100,7 +118,7 @@ class AddProductActivity : AppCompatActivity() {
             return
         }
 
-        if (imageUri == null) {
+        if (imageBase64 == null) {
             Toast.makeText(this, "Please select product image", Toast.LENGTH_SHORT).show()
             return
         }
@@ -110,48 +128,27 @@ class AddProductActivity : AppCompatActivity() {
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val storageRef = FirebaseStorage.getInstance().reference
-        val imageRef = storageRef.child("product_images/${UUID.randomUUID()}.jpg")
+        val productId = UUID.randomUUID().toString()
+        val product = HashMap<String, Any>()
+        product["productId"] = productId
+        product["productName"] = productName
+        product["productDescription"] = productDescription
+        product["productPrice"] = productPrice.toDouble()
+        product["category"] = category
+        product["imageBase64"] = imageBase64!!
+        product["shopOwnerId"] = shopOwnerId
+        product["timestamp"] = System.currentTimeMillis()
 
-        // ✅ Correct and safe way to upload + get URL
-        val uploadTask = imageRef.putFile(imageUri!!)
-        uploadTask
-            .continueWithTask { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let { throw it }
-                }
-                imageRef.downloadUrl
+        val databaseRef = FirebaseDatabase.getInstance().getReference("Products")
+        databaseRef.child(productId).setValue(product)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "✅ Product added successfully!", Toast.LENGTH_SHORT).show()
+                clearForm()
             }
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val imageUrl = task.result.toString()
-
-                    val productId = UUID.randomUUID().toString()
-                    val product = HashMap<String, Any>()
-                    product["productId"] = productId
-                    product["productName"] = productName
-                    product["productDescription"] = productDescription
-                    product["productPrice"] = productPrice.toDouble()
-                    product["category"] = category
-                    product["imageUrl"] = imageUrl
-                    product["shopOwnerId"] = shopOwnerId
-                    product["timestamp"] = System.currentTimeMillis()
-
-                    val databaseRef = FirebaseDatabase.getInstance().getReference("Products")
-                    databaseRef.child(productId).setValue(product)
-                        .addOnSuccessListener {
-                            progressDialog.dismiss()
-                            Toast.makeText(this, "✅ Product added successfully!", Toast.LENGTH_SHORT).show()
-                            clearForm()
-                        }
-                        .addOnFailureListener { e ->
-                            progressDialog.dismiss()
-                            Toast.makeText(this, "❌ Failed to add product: ${e.message}", Toast.LENGTH_LONG).show()
-                        }
-                } else {
-                    progressDialog.dismiss()
-                    Toast.makeText(this, "❌ Image upload failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
-                }
+            .addOnFailureListener { e ->
+                progressDialog.dismiss()
+                Toast.makeText(this, "❌ Failed to add product: ${e.message}", Toast.LENGTH_LONG).show()
             }
     }
 
@@ -161,6 +158,7 @@ class AddProductActivity : AppCompatActivity() {
         etProductPrice.text.clear()
         productImage.setImageResource(android.R.drawable.ic_menu_gallery)
         imageUri = null
+        imageBase64 = null
         spinnerCategory.setSelection(0)
     }
 }

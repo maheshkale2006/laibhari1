@@ -116,10 +116,10 @@ class ViewProductsActivity : AppCompatActivity() {
         RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
         inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val productImage: ImageView = itemView.findViewById(R.id.ivProductImage)
-            val productName: TextView = itemView.findViewById(R.id.tvProductName)
-            val productPrice: TextView = itemView.findViewById(R.id.tvProductPrice)
-            val productCategory: TextView = itemView.findViewById(R.id.tvProductCategory)
+            val productImage: ImageView = itemView.findViewById(R.id.imgProduct)
+            val productName: TextView = itemView.findViewById(R.id.txtProductName)
+            val productPrice: TextView = itemView.findViewById(R.id.txtProductPrice)
+           val productCategory: TextView = itemView.findViewById(R.id.txtProductCategory)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
