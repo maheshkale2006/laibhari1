@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.laihari"
+    namespace = "com.example.laibhariowner"
     compileSdk = 36
 
     defaultConfig {

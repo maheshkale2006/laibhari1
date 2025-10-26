@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@android:color/white"
-    tools:context=".AddProductActivity">
+    tools:context=".EditProductActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,81 +13,90 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header -->
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvEditTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Product"
+            android:text="Edit Product"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="@android:color/black"
             android:layout_gravity="center"
-            android:paddingBottom="12dp" />
+            android:paddingBottom="16dp" />
 
-        <!-- Product Image -->
         <ImageView
-            android:id="@+id/productImage"
+            android:id="@+id/imgProduct"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:src="@android:drawable/ic_menu_gallery"
             android:scaleType="centerCrop"
-            android:background="@android:color/darker_gray"
+            android:background="#E0E0E0"
             android:contentDescription="Product Image"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="12dp" />
 
-        <!-- Select Image Button -->
-        <Button
-            android:id="@+id/btnSelectImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Select Image" />
-
-        <!-- Product Name -->
         <EditText
-            android:id="@+id/etProductName"
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Product Name"
-            android:inputType="textPersonName"
-            android:layout_marginTop="12dp" />
+            android:inputType="textCapWords"
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
 
-        <!-- Product Description -->
         <EditText
-            android:id="@+id/etProductDescription"
+            android:id="@+id/etDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Product Description"
             android:inputType="textMultiLine"
             android:minLines="3"
             android:gravity="top"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
 
-        <!-- Product Price -->
         <EditText
-            android:id="@+id/etProductPrice"
+            android:id="@+id/etPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Product Price"
             android:inputType="numberDecimal"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text" />
 
-        <!-- Category Spinner -->
         <Spinner
             android:id="@+id/spinnerCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:spinnerMode="dropdown" />
 
-        <!-- Add Product Button -->
         <Button
-            android:id="@+id/btnAddProduct"
+            android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Product"
-            android:layout_marginTop="16dp"
+            android:text="Update Product"
+            android:layout_marginTop="20dp"
             android:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:fontFamily="sans-serif-medium" />
+
+        <Button
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Product"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:fontFamily="sans-serif-medium" />
 
     </LinearLayout>
 </ScrollView>

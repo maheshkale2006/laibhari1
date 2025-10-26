@@ -4,57 +4,55 @@
     android:layout_height="match_parent"
     android:background="@android:color/white">
 
-    <!-- Header with id -->
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:src="@android:drawable/ic_menu_revert"
+        android:contentDescription="Back Button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp">
-
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            android:layout_centerVertical="true"
-            android:contentDescription="Back button" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/my_products"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
+        android:text="My Products"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 
     <!-- Progress Bar -->
     <ProgressBar
         android:id="@+id/progressBar"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <!-- No Products Message -->
+    <!-- No Products Text -->
     <TextView
         android:id="@+id/tvNoProducts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_products_added"
-        android:textSize="16sp"
+        android:text="No products available"
         android:layout_centerInParent="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:textColor="#888888" />
 
-    <!-- Products List - Fixed to be below header -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProducts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="10dp"
         android:padding="8dp" />
 
 </RelativeLayout>

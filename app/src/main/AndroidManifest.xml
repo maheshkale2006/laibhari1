@@ -20,15 +20,6 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ReviewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrdersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CartActivity"
-            android:exported="false" />
-        <activity
             android:name=".ShopOwnerActivity"
             android:exported="false" /> <!-- Launcher Activity (Login Screen) -->
         <activity
@@ -40,11 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- Registration Screen -->
-        <activity android:name=".RegisterActivity" /> <!-- Main Screen (after login) -->
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ProductActivity" />
+
         <activity android:name=".AddProductActivity" />
         <activity android:name=".ViewProductsActivity" />
+        <activity android:name=".EditProductActivity" />
     </application>
 
 </manifest>

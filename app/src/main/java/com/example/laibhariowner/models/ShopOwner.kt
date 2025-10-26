@@ -1,4 +1,4 @@
-package com.example.laihari.models
+package com.example.laibhariowner.models
 
 data class ShopOwner(
     val name: String? = "",

@@ -1,4 +1,4 @@
-package com.example.laihari
+package com.example.laibhariowner
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

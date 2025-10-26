@@ -1,4 +1,4 @@
-package com.example.laihari
+package com.example.laibhariowner
 
 import android.content.Intent
 import android.net.ConnectivityManager
@@ -8,7 +8,6 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -28,19 +27,16 @@ class LoginActivity : AppCompatActivity() {
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
-        val tvRegister = findViewById<TextView>(R.id.tvGoRegister)
 
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString()
 
-            // Internet check
             if (!isConnected()) {
                 showError("No internet connection. Please check your network.")
                 return@setOnClickListener
             }
 
-            // Validate input
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 etEmail.error = "Enter valid email"
                 return@setOnClickListener
@@ -50,11 +46,9 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Show loading
             btnLogin.isEnabled = false
             btnLogin.text = "Logging in..."
 
-            // Firebase Login
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -64,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             resetButton(btnLogin)
                             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, MainActivity::class.java))
+                            startActivity(Intent(this, ShopOwnerActivity::class.java))
                             finish()
                         }
                     } else {
@@ -72,10 +66,6 @@ class LoginActivity : AppCompatActivity() {
                         showError("Error: ${task.exception?.message}")
                     }
                 }
-        }
-
-        tvRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
@@ -85,23 +75,17 @@ class LoginActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { snapshot ->
                 resetButton(btnLogin)
+                val userType = snapshot.child("userType").getValue(String::class.java) ?: "ShopOwner"
 
-                val userType = snapshot.child("userType").getValue(String::class.java) ?: "Customer"
-                Toast.makeText(this, "Login Successful as $userType", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Welcome $userType", Toast.LENGTH_SHORT).show()
 
-                val nextActivity = if (userType == "ShopOwner") {
-                    ShopOwnerActivity::class.java
-                } else {
-                    MainActivity::class.java
-                }
-                startActivity(Intent(this, nextActivity))
+                // Force only owner dashboard
+                startActivity(Intent(this, ShopOwnerActivity::class.java))
                 finish()
             }
             .addOnFailureListener { exception ->
                 resetButton(btnLogin)
                 showError("Failed to get user data: ${exception.message}")
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
             }
     }
 
@@ -115,7 +99,6 @@ class LoginActivity : AppCompatActivity() {
         Log.e(TAG, message)
     }
 
-    // ✅ Same internet connectivity check as RegisterActivity
     private fun isConnected(): Boolean {
         val cm = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = cm.activeNetwork ?: return false
@@ -127,25 +110,8 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            val uid = currentUser.uid
-            FirebaseDatabase.getInstance().getReference("Users")
-                .child(uid)
-                .get()
-                .addOnSuccessListener { snapshot ->
-                    val userType = snapshot.child("userType").getValue(String::class.java) ?: "Customer"
-
-                    val nextActivity = if (userType == "ShopOwner") {
-                        ShopOwnerActivity::class.java
-                    } else {
-                        MainActivity::class.java
-                    }
-                    startActivity(Intent(this, nextActivity))
-                    finish()
-                }
-                .addOnFailureListener {
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
-                }
+            startActivity(Intent(this, ShopOwnerActivity::class.java))
+            finish()
         }
     }
 }

@@ -1,18 +1,24 @@
 {
   "project_info": {
     "project_number": "432142809269",
+    "firebase_url": "https://laihari-default-rtdb.firebaseio.com",
     "project_id": "laihari",
     "storage_bucket": "laihari.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432142809269:android:cb60dadca5c41843d4a6fc",
+        "mobilesdk_app_id": "1:432142809269:android:102369b10fc3aa76d4a6fc",
         "android_client_info": {
-          "package_name": "com.example.laihari"
+          "package_name": "com.example.laibhariowner"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAFtd_x7ADXSioqoKO0TCO1iYccF3nyrI8"
@@ -20,7 +26,70 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432142809269:android:4c0cdd104b94dc36d4a6fc",
+        "android_client_info": {
+          "package_name": "com.example.laibhariuser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFtd_x7ADXSioqoKO0TCO1iYccF3nyrI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432142809269:android:cb60dadca5c41843d4a6fc",
+        "android_client_info": {
+          "package_name": "com.example.laihari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFtd_x7ADXSioqoKO0TCO1iYccF3nyrI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432142809269-nim214kv74eipnlg4t9lg18jrh73brtn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
