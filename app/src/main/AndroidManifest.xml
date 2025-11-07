@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Add these permissions for Firebase -->
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -16,25 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Laihari"
         tools:targetApi="31">
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ShopOwnerActivity"
-            android:exported="false" /> <!-- Launcher Activity (Login Screen) -->
+
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ShopOwnerActivity" />
+        <activity android:name=".AddProductActivity" />
+        <activity android:name=".EditProductActivity" />
+        <activity android:name=".ViewProductsActivity" />
+        <activity android:name=".ViewOrdersActivity" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Registration Screen -->
-
-        <activity android:name=".AddProductActivity" />
-        <activity android:name=".ViewProductsActivity" />
-        <activity android:name=".EditProductActivity" />
+        </activity>
     </application>
-
 </manifest>

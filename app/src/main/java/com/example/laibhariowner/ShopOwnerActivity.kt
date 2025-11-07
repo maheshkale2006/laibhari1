@@ -20,19 +20,22 @@ class ShopOwnerActivity : AppCompatActivity() {
         val tvWelcome = findViewById<TextView>(R.id.tvWelcome)
         val btnAddProduct = findViewById<Button>(R.id.btnAddProduct)
         val btnViewProducts = findViewById<Button>(R.id.btnViewProducts)
+        val btnViewOrders = findViewById<Button>(R.id.btnViewOrders)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
 
         val currentUser = auth.currentUser
         tvWelcome.text = "Welcome, Shop Owner!\n${currentUser?.email}"
 
         btnAddProduct.setOnClickListener {
-            // Navigate to Add Product Activity
-            startActivity(Intent(this, AddProductActivity::class.java))//AddProductActivity
+            startActivity(Intent(this, AddProductActivity::class.java))
         }
 
         btnViewProducts.setOnClickListener {
-            // Navigate to View Products Activity
-            startActivity(Intent(this, ViewProductsActivity::class.java))//ViewProductsActivity
+            startActivity(Intent(this, ViewProductsActivity::class.java))
+        }
+
+        btnViewOrders.setOnClickListener {
+            startActivity(Intent(this, ViewOrdersActivity::class.java))
         }
 
         btnLogout.setOnClickListener {
